@@ -25,7 +25,7 @@ export default function Navigation() {
                         </NavigationMenuItem>
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
-                                <Link>Discover</Link>
+                                <Link>Properties</Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
