@@ -29,12 +29,12 @@ export const NEW_PROPERTIE = '/profile/me/dashboard/properties/new'
 export const EDIT_PROPERTIE = (id) => `/profile/me/dashboard/properties/${id}/edit`
 export const MANAGE_BOOKING = '/profile/me/dashboard/booking'
 //user or client
-export const MY_BOOKING = (id) => `client/${id+Math.random()*1000000}/my-rentals`
+// export const MY_BOOKING = (id) => `client/${id+''+(Math.random()*1000000)}/my-rentals`
 export const CONFIRME_BOOKING = '/client/booking/confirm'
 export const FAVORITES = '/client/booking/favorites'
 export const ADMIN_DASHBOARD = '/admin/dashboard'
 export const USER_MANAGEMENT = '/admin/users'
-export const VIEW_USER = (id) => `/admin/user/${id+Math.random()*1000000}`
+// export const VIEW_USER = (id) => `/admin/user/${id+''+(Math.random()*1000000)}`
 export const PROPERTY_MANAGEMENT = '/admin/properties'
 export const BOOKING_OVERVIEW = '/admin/bookings'
 export const SITE_SETTINGS = '/admin/settings'
@@ -53,7 +53,7 @@ export const Router = createBrowserRouter([
                 element: <Properties />
             },
             {
-                path: PROPERTIE,
+                path: "/properties/:id",
                 element: <Propertie />
             },
             {

@@ -45,14 +45,14 @@ export default function Navigation() {
                         </NavigationMenuItem>
                         <NavigationMenuItem>
                             <NavigationMenuTrigger>Sign in</NavigationMenuTrigger>
-                            <NavigationMenuContent className="bg-slate-900">
+                            <NavigationMenuContent className="bg-[#F4EBD0]">
                                 <ul className="grid w-[200px] gap-4 ">
                                     <li>
                                         <NavigationMenuLink asChild>
-                                            <Link>Sign up</Link>
+                                            <Link className="text-[#333333]">Sign up</Link>
                                         </NavigationMenuLink>
                                         <NavigationMenuLink asChild>
-                                            <Link>Sign in</Link>
+                                            <Link className="text-[#333333]">Sign in</Link>
                                         </NavigationMenuLink>
                                     </li>
                                 </ul>

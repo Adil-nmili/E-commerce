@@ -1,7 +1,11 @@
+import Search from "../../components/partials/home/Search";
+import SliderHero from "../../components/partials/home/Slider";
+
 export default function Home () {
     return (
         <>
-            <h1>Home</h1>
+            <SliderHero />
+            <Search />
         </>
     )
 }

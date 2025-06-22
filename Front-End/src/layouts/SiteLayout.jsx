@@ -8,9 +8,9 @@ export default function () {
         <>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <div className="min-h-screen flex flex-col">
-            <header className="bg-slate-800 py-2 px-4 text-gray-200 flex justify-between">
+            <header className="bg-[#1F3C88] py-2 px-4 shadow-sm shadow-black text-gray-200 flex justify-between items-center fixed top-0 left-0 right-0 z-50">
                 <div>
-                    <h1>LOGO</h1>
+                    <img src="/assets/logo.png" alt="FindMyStay-logo" className="h-16 object-cover w-24" />
                 </div>
                 <Navigation />
                 <div>
