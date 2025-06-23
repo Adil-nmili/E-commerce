@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom"
 import Navigation from "../components/partials/Navigation"
 import { ModeToggle } from '@/components/mode-toggle'
 import { ThemeProvider } from "@/components/theme-provider"
+import Footer from "../components/partials/Footer"
 
 export default function () {
     return (
@@ -20,9 +21,8 @@ export default function () {
             <main className="flex-1 flex flex-col">
                 <Outlet />
             </main>
-            <footer className="bg-slate-800 py-2 px-4">
-                footer
-            </footer></div>
+            <Footer />
+            </div>
             </ThemeProvider>
         </>
     )

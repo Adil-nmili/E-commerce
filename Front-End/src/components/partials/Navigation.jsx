@@ -9,6 +9,7 @@ import {
     NavigationMenuTrigger,
     NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
+import { ABOUT, BLOG } from "../../router/Router";
 
 
 export default function Navigation() {
@@ -30,12 +31,12 @@ export default function Navigation() {
                         </NavigationMenuItem>
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
-                                <Link>Blog</Link>
+                                <Link to={BLOG}>Blog</Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
-                                <Link>About US</Link>
+                                <Link to={ABOUT}>About US</Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>

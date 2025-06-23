@@ -9,6 +9,7 @@ import Faq from "../pages/site/Faq";
 import Register from "../pages/site/Register";
 import Login from "../pages/site/Login";
 import ForgotPassword from "../pages/site/ForgotPassword";
+import Blog from "../pages/site/Blog";
 
 // Links
 // generale
@@ -16,6 +17,7 @@ export const HOME = '/'
 export const PROPERTIES = '/properties'
 export const PROPERTIE = (id) => `/properties/${id}`
 export const ABOUT = '/about'
+export const BLOG = '/blog'
 export const CONTACT = '/contact'
 export const FAQ = '/faq'
 export const REGISTER = '/register'
@@ -59,6 +61,10 @@ export const Router = createBrowserRouter([
             {
                 path: ABOUT,
                 element: <About />
+            },
+            {
+                path: BLOG,
+                element: <Blog />
             },
             {
                 path: CONTACT,
