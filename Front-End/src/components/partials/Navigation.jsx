@@ -9,7 +9,7 @@ import {
     NavigationMenuTrigger,
     NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
-import { ABOUT, BLOG } from "../../router/Router";
+import { ABOUT, BLOG, CONTACT, LOGIN, REGISTER } from "../../router/Router";
 
 
 export default function Navigation() {
@@ -41,7 +41,7 @@ export default function Navigation() {
                         </NavigationMenuItem>
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
-                                <Link>Contact us</Link>
+                                <Link to={CONTACT}>Contact us</Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
@@ -50,10 +50,10 @@ export default function Navigation() {
                                 <ul className="grid w-[200px] gap-4 ">
                                     <li>
                                         <NavigationMenuLink asChild>
-                                            <Link className="text-[#333333]">Sign up</Link>
+                                            <Link to={REGISTER} className="text-[#333333]">Sign up</Link>
                                         </NavigationMenuLink>
                                         <NavigationMenuLink asChild>
-                                            <Link className="text-[#333333]">Sign in</Link>
+                                            <Link to={LOGIN} className="text-[#333333]">Sign in</Link>
                                         </NavigationMenuLink>
                                     </li>
                                 </ul>

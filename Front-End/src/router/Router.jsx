@@ -10,6 +10,16 @@ import Register from "../pages/site/Register";
 import Login from "../pages/site/Login";
 import ForgotPassword from "../pages/site/ForgotPassword";
 import Blog from "../pages/site/Blog";
+import NotFoundPage from "../pages/NotFoundPage";
+import SinglePostPage from "../components/partials/blog/post/SinglePostPage";
+import SignUp from "../pages/SignUp";
+import { SignUpPage } from "../pages/SignUpPage";
+import { SignInPage } from "../pages/SignInPage";
+import PrivacyPolicy from "../pages/LegalNotice";
+import TermsOfService from "../pages/TermsOfService";
+import ContactPage from "../pages/site/Contact";
+import AdminDashboard from "../pages/dashboard/Dashboard";
+import LayoutDashboard from "../layouts/LayoutDashboard";
 
 // Links
 // generale
@@ -18,11 +28,14 @@ export const PROPERTIES = '/properties'
 export const PROPERTIE = (id) => `/properties/${id}`
 export const ABOUT = '/about'
 export const BLOG = '/blog'
+export const POST = '/blog/post'
 export const CONTACT = '/contact'
 export const FAQ = '/faq'
-export const REGISTER = '/register'
+export const REGISTER = '/signup'
 export const LOGIN = '/login'
-export const FORGET_PASSWORD = '/forgot-password' 
+export const FORGET_PASSWORD = '/forgot-password'
+export const PRIVACY = '/privacy'
+export const TERMES = '/terms'
 //exebitor
 export const USER_PROFILE = '/profile/me'
 export const DASHBOARD_ME = '/profile/me/dashboard'
@@ -67,8 +80,12 @@ export const Router = createBrowserRouter([
                 element: <Blog />
             },
             {
+                path: POST,
+                element: <SinglePostPage />
+            },
+            {
                 path: CONTACT,
-                element: <Contact />
+                element: <ContactPage />
             },
             {
                 path: FAQ,
@@ -76,16 +93,42 @@ export const Router = createBrowserRouter([
             },
             {
                 path: REGISTER,
-                element: <Register />
+                element: <SignUpPage />
             },
+            // {
+            //     path: REGISTER,
+            //     element: <SignUp />
+            // },
             {
                 path: LOGIN,
-                element: <Login />
+                element: <SignInPage />
             },
             {
                 path: FORGET_PASSWORD,
                 element: <ForgotPassword />
             },
+
         ]
     },
+    {
+        element: <LayoutDashboard />,
+        children : [
+            {
+                path:ADMIN_DASHBOARD,
+                element: <AdminDashboard />,
+            }
+        ]
+    },
+    {
+        path: PRIVACY,
+        element: <PrivacyPolicy />
+    },
+    {
+        path: TERMES,
+        element: <TermsOfService />
+    },
+    {
+        path: "*",
+        element: <NotFoundPage />
+    }
 ])

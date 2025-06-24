@@ -1,15 +1,15 @@
 import './App.css'
-// import { ThemeProvider } from "@/components/theme-provider"
 import { RouterProvider } from 'react-router-dom'
 import { Router } from './router/Router'
+import { AuthProvider } from './context/AuthContext'
 
 
 export default function App() {
-  return(
+  return (
     <>
-      {/* <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme"> */}
-      <RouterProvider router={Router}/>
-    {/* </ThemeProvider> */}
+      
+        <RouterProvider router={Router} />
+      
     </>
   )
 }
