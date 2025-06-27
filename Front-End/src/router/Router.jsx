@@ -20,6 +20,7 @@ import TermsOfService from "../pages/TermsOfService";
 import ContactPage from "../pages/site/Contact";
 import AdminDashboard from "../pages/dashboard/Dashboard";
 import LayoutDashboard from "../layouts/LayoutDashboard";
+import UserPage from "../pages/dashboard/UsersPage"
 
 // Links
 // generale
@@ -116,6 +117,10 @@ export const Router = createBrowserRouter([
             {
                 path:ADMIN_DASHBOARD,
                 element: <AdminDashboard />,
+            },
+            {
+                path:USER_MANAGEMENT,
+                element : <UserPage />
             }
         ]
     },

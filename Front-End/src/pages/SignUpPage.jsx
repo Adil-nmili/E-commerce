@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -15,8 +16,9 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2, Mail, User, Lock, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Added useNavigate
 import { LOGIN, PRIVACY, TERMES } from "../router/Router";
+import { useAuth } from "../context/AuthContext";
 
 // Zod validation schema
 const formSchema = z.object({
@@ -39,6 +41,10 @@ const formSchema = z.object({
 });
 
 export const SignUpPage = () => {
+  const navigate = useNavigate(); // For navigation after successful registration
+  const [error, setError] = useState(null); // State for registration errors
+  const { register: authRegister } = useAuth(); // Using authRegister from context
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,10 +57,34 @@ export const SignUpPage = () => {
   });
 
   const onSubmit = async (values) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(values);
-    // Add your signup logic here
+    setError(null); // Reset error state
+    
+    try {
+      // Prepare registration data
+      const userData = {
+        name: values.fullName,
+        email: values.email,
+        password: values.password,
+        role: "client", // Default role for signups
+        // Add any additional fields your backend requires
+      };
+      
+      // Call authRegister from AuthContext
+      const response = await authRegister(userData);
+      
+      // If registration is successful
+      if (response && response.user) {
+        console.log("Registration successful", response);
+        navigate(LOGIN); // Redirect to login page
+      }
+    } catch (err) {
+      console.error("Registration error:", err);
+      setError(
+        err.response?.data?.message || 
+        err.message || 
+        "Registration failed. Please try again."
+      );
+    }
   };
 
   return (
@@ -71,6 +101,13 @@ export const SignUpPage = () => {
             Join us to start managing your properties
           </p>
         </div>
+
+        {/* Display error message if exists */}
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md text-center">
+            {error}
+          </div>
+        )}
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

@@ -88,7 +88,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen  flex">
       <div className="w-full">
         <main className="p-4 sm:p-6">
           {/* Stats Cards */}

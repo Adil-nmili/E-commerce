@@ -1,16 +1,16 @@
-import  { createContext, useContext, useState, useEffect } from 'react';
+// src/context/AuthContext.js
+import { createContext, useContext, useState, useEffect } from 'react';
 import api from '../services/api';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { authService } from '../services/AuthService';
 
+// Create context OUTSIDE the provider
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const AuthContext = createContext(null);
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem('auth_token') || null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
-    const location = useLocation();
 
     // Initialize user from token on mount
     useEffect(() => {
@@ -41,46 +41,51 @@ export const AuthProvider = ({ children }) => {
         }
     }, [token]);
 
-    // Login function
-    const login = async (credentials) => {
+    // Login function (REMOVED NAVIGATION)
+    const loginUser = async (credentials) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await api.post('/login', credentials);
+            const response = await authService.login(credentials);
             setToken(response.data.token);
             setUser(response.data.user);
-
-            // Redirect to previous location or dashboard
-            const origin = location.state?.from?.pathname || getDefaultRoute(response.data.user.role);
-            navigate(origin);
+            return response.data; // Return response data
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed. Please try again.');
             console.error('Login error:', err);
+            throw err;
         } finally {
             setLoading(false);
         }
     };
 
-    // Register function
-    const register = async (userData) => {
+    // Register function (REMOVED NAVIGATION)
+    const registerUser  = async (userData) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await api.post('/register', userData);
+            const payload = {
+                name: userData.fullName,
+                email: userData.email,
+                password: userData.password,
+                role: 'client'
+            };
+            
+            const response = await authService.register(userData)
+            // const response = await api.post('/register', payload);
             setToken(response.data.token);
             setUser(response.data.user);
-
-            // Redirect based on role
-            navigate(getDefaultRoute(response.data.user.role));
+            return response.data;
         } catch (err) {
             setError(err.response?.data?.message || 'Registration failed. Please try again.');
             console.error('Registration error:', err);
+            throw err;
         } finally {
             setLoading(false);
         }
     };
 
-    // Logout function
+    // Logout function (REMOVED NAVIGATION)
     const logout = async () => {
         try {
             await api.post('/logout');
@@ -89,11 +94,9 @@ export const AuthProvider = ({ children }) => {
         } finally {
             setToken(null);
             setUser(null);
-            navigate('/login');
         }
     };
 
-    // Check if user has required role(s)
     const hasRole = (requiredRoles) => {
         if (!user) return false;
         if (Array.isArray(requiredRoles)) {
@@ -102,27 +105,13 @@ export const AuthProvider = ({ children }) => {
         return user.role === requiredRoles;
     };
 
-    // Get default route based on user role
-    const getDefaultRoute = (role) => {
-        switch (role) {
-            case 'admin':
-                return '/admin/dashboard';
-            case 'owner':
-                return '/owner/properties';
-            case 'assistant':
-                return '/assistant/complaints';
-            default:
-                return '/';
-        }
-    };
-
     const value = {
         user,
         token,
         loading,
         error,
-        login,
-        register,
+        loginUser,
+        registerUser,
         logout,
         hasRole,
         isAuthenticated: !!token
@@ -130,7 +119,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     );
 };
