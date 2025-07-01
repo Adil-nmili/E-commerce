@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Users, 
@@ -14,6 +14,12 @@ import {
   ChevronRight,
   User
 } from 'react-feather';
+
+import { Card, CardContent, CardHeader, CardFooter, CardDescription} from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+
+
 
 const UsersPage = () => {
   // Mock user data with properties count
@@ -122,28 +128,30 @@ const UsersPage = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
+    <Card className="px-4">
+      <CardDescription className="flex flex-col md:flex-row md:items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Users Management</h2>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">
+          <h2 className="text-lg font-bold underline text-gray-900 dark:text-white">Users Management</h2>
+          <p className="text-gray-500 text-xs">
             Manage all users of the platform ({filteredUsers.length} users found)
           </p>
         </div>
-        <button className="mt-4 md:mt-0 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center">
-          <Plus size={16} className="mr-2" />
+        <Button
+        variant='outline'
+        className="text-xs">
+          <Plus size={12} className="mr-1" />
           Add New User
-        </button>
-      </div>
+        </Button>
+      </CardDescription>
       
       {/* Filters Section */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <CardHeader className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="relative">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
+          <Search size={12} className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400" />
+          <Input
             type="text"
             placeholder="Search by name or email..."
-            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+            className="w-full px-6"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -192,7 +200,7 @@ const UsersPage = () => {
             Reset Filters
           </button>
         </div>
-      </div>
+      </CardHeader>
       
       {/* Users Table */}
       <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
@@ -425,7 +433,7 @@ const UsersPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
