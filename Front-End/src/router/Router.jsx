@@ -21,6 +21,7 @@ import ContactPage from "../pages/site/Contact";
 import AdminDashboard from "../pages/dashboard/Dashboard";
 import LayoutDashboard from "../layouts/LayoutDashboard";
 import UserPage from "../pages/dashboard/UsersPage"
+import PropertiesPage from "../pages/dashboard/PropertiesPage";
 
 // Links
 // generale
@@ -121,6 +122,10 @@ export const Router = createBrowserRouter([
             {
                 path:USER_MANAGEMENT,
                 element : <UserPage />
+            },
+            {
+                path: PROPERTY_MANAGEMENT,
+                element:<PropertiesPage />
             }
         ]
     },

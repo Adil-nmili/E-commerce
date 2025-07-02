@@ -20,7 +20,7 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { CloudCog, Menu,HomeIcon } from 'lucide-react'
 import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { ADMIN_DASHBOARD, CONTACT, PRIVACY, TERMES, USER_MANAGEMENT } from '../router/Router';
+import { ADMIN_DASHBOARD, CONTACT, PRIVACY, PROPERTY_MANAGEMENT, TERMES, USER_MANAGEMENT } from '../router/Router';
 
 
 const LayoutDashboard = () => {
@@ -48,7 +48,7 @@ const LayoutDashboard = () => {
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <HomeIcon size={14} />, url: ADMIN_DASHBOARD },
     { id: 'users', label: 'Users', icon: <Users size={14} />, url: USER_MANAGEMENT },
-    { id: 'properties', label: 'Properties', icon: <HomeIcon size={14} />, url: "#" },
+    { id: 'properties', label: 'Properties', icon: <HomeIcon size={14} />, url: PROPERTY_MANAGEMENT },
     { id: 'bookings', label: 'Bookings', icon: <Calendar size={14} />, url: "#" },
     { id: 'complaints', label: 'Complaints', icon: <AlertCircle size={14} />, url: "#" },
     { id: 'settings', label: 'Settings', icon: <Settings size={14} />, url: "#" },
