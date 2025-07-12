@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/co
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import { useState } from "react"
+import AddAssistant from "@/components/forms/AddAssistant"
 
 
 
@@ -19,12 +20,14 @@ const AssistantsPage = () => {
                     Manage all assistants of the platform ({assistants.length} assistants found)
                   </p>
                 </div>
+                <AddAssistant>
                 <Button
                   variant='outline'
                   className="text-xs">
                   <Plus size={12} className="mr-1" />
                   Add New Assistant
                 </Button>
+                </AddAssistant>
               </CardDescription>
     </Card>
   )

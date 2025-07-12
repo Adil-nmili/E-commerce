@@ -152,14 +152,14 @@ const LayoutDashboard = () => {
                     className="flex items-center space-x-2 group cursor-pointer"
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                   >
-                    <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-800 dark:text-indigo-200 font-medium">{user.profile.avatar == null ?(
-                      <>{Array.from(user.name)[0]}</>
+                    {/* <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-800 dark:text-indigo-200 font-medium">{user?.profile.avatar == null ?(
+                      <>{Array.from(user?.name)[0]}</>
                     ):(
                       <>
-                        <img src={user.profile.avatar} alt={user.name} className='w-full h-full object-cover rounded-full'/>
+                        <img src={user?.profile.avatar} alt={user?.name} className='w-full h-full object-cover rounded-full'/>
                       </>
-                    )}</div>
-                    <span className="hidden lg:inline-block text-sm font-medium capitalize">{user.name}</span>
+                    )}</div> */}
+                    <span className="hidden lg:inline-block text-sm font-medium capitalize">{user?.name}</span>
                     <ChevronDown size={16} className={userDropdownOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
                   </div>
 
@@ -174,7 +174,7 @@ const LayoutDashboard = () => {
                       >
                         <div className="py-1">
                           <div className={`px-4 py-3 border-b `}>
-                            <p className="text-sm font-medium uppercase">{user.name}</p>
+                            <p className="text-sm font-medium uppercase">{user?.name}</p>
                             <p className="text-sm text-gray-500 dark:text-gray-400">{user.email}</p>
                           </div>
                           {[{ icon: User, label: 'Your Profile' }, { icon: Settings, label: 'Account Settings' }, { icon: HelpCircle, label: 'Help & Support' }].map(({ icon: Icon, label }) => (

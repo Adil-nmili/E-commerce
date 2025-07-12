@@ -132,9 +132,9 @@ export const Router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute role={"client"}>
+      // <ProtectedRoute role={"client"}>
         <LayoutDashboard />
-      </ProtectedRoute>
+      // </ProtectedRoute>
     ),
     children: [
       {
