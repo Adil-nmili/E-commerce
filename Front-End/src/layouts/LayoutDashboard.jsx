@@ -20,11 +20,14 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { CloudCog, Menu,HomeIcon } from 'lucide-react'
 import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { ADMIN_DASHBOARD, BOOKING_OVERVIEW, CONTACT, PRIVACY, PROPERTY_MANAGEMENT, TERMES, USER_MANAGEMENT } from '../router/Router';
+import { ADMIN_DASHBOARD, ASSISTANT_MANAGEMENT, BOOKING_OVERVIEW, CONTACT, PRIVACY, PROPERTY_MANAGEMENT, TERMES, USER_MANAGEMENT } from '../router/Router';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const LayoutDashboard = () => {
   const params = useParams()
+  const user = useSelector(state => state.auth.user)
+  const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
   const [darkMode, setDarkMode] = useState(false);
@@ -47,6 +50,7 @@ const LayoutDashboard = () => {
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <HomeIcon size={14} />, url: ADMIN_DASHBOARD },
+    { id: 'assistants', label: 'Assistants', icon: <Users size={14} />, url: ASSISTANT_MANAGEMENT },
     { id: 'users', label: 'Users', icon: <Users size={14} />, url: USER_MANAGEMENT },
     { id: 'properties', label: 'Properties', icon: <HomeIcon size={14} />, url: PROPERTY_MANAGEMENT },
     { id: 'bookings', label: 'Bookings', icon: <Calendar size={14} />, url: BOOKING_OVERVIEW },
@@ -148,8 +152,14 @@ const LayoutDashboard = () => {
                     className="flex items-center space-x-2 group cursor-pointer"
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                   >
-                    <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-800 dark:text-indigo-200 font-medium">A</div>
-                    <span className="hidden lg:inline-block text-sm font-medium">Admin User</span>
+                    <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-800 dark:text-indigo-200 font-medium">{user.profile.avatar == null ?(
+                      <>{Array.from(user.name)[0]}</>
+                    ):(
+                      <>
+                        <img src={user.profile.avatar} alt={user.name} className='w-full h-full object-cover rounded-full'/>
+                      </>
+                    )}</div>
+                    <span className="hidden lg:inline-block text-sm font-medium capitalize">{user.name}</span>
                     <ChevronDown size={16} className={userDropdownOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
                   </div>
 
@@ -164,14 +174,14 @@ const LayoutDashboard = () => {
                       >
                         <div className="py-1">
                           <div className={`px-4 py-3 border-b `}>
-                            <p className="text-sm font-medium">Admin User</p>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">admin@propertyhub.com</p>
+                            <p className="text-sm font-medium uppercase">{user.name}</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{user.email}</p>
                           </div>
                           {[{ icon: User, label: 'Your Profile' }, { icon: Settings, label: 'Account Settings' }, { icon: HelpCircle, label: 'Help & Support' }].map(({ icon: Icon, label }) => (
                             <button key={label} className={`w-full text-left px-4 py-2 text-sm hover:${darkMode ? 'bg-gray-700' : 'bg-gray-100'}`}> <div className="flex items-center space-x-2"> <Icon size={16} /><span>{label}</span></div></button>
                           ))}
                           <div className={`border-t `}>
-                            <button className={`w-full text-left px-4 py-2 text-sm hover:${darkMode ? 'bg-gray-700' : 'bg-gray-100'}`}> <div className="flex items-center space-x-2"> <LogOut size={16} /><span>Sign out</span></div></button>
+                            <Button onClick={() => dispatch({type:"LOGOUT"})} variant='destructive' className='w-11/12 m-2 text-xs'> <div className="flex items-center space-x-2"> <LogOut size={12} /><span>Sign out</span></div></Button>
                           </div>
                         </div>
                       </motion.div>

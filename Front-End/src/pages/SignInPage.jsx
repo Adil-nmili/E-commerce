@@ -15,7 +15,13 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { PasswordInput } from "@/components/ui/password-input";
 import { Loader2, Mail, Lock, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
+import { ADMIN_DASHBOARD, ASSISTANCE_DASHBOARD, HOME, USER_MANAGEMENT, USER_PROFILE } from "../router/Router";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRequest } from "../redux/actions";
+// import { loginStart, loginSuccess, loginFailure } from "../redux/authSlice";
+
 
 // Zod validation schema
 const formSchema = z.object({
@@ -25,6 +31,11 @@ const formSchema = z.object({
 });
 
 export const SignInPage = () => {
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  
+  const user = useSelector(state => state.auth.user)
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,12 +45,37 @@ export const SignInPage = () => {
     },
   });
 
+
   const onSubmit = async (values) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(values);
-    // Add your sign-in logic here
-  };
+       dispatch(loginRequest(values))
+  }
+
+  useEffect(()=>{
+    if(user){
+      switch (user.role) {
+        case 'admin':
+          navigate(ADMIN_DASHBOARD)
+          break;
+        case 'client':
+          navigate(ADMIN_DASHBOARD)
+          break;
+        case 'assistant':
+          navigate(ASSISTANCE_DASHBOARD)
+          break;
+        case 'owner':
+          navigate(USER_PROFILE)
+          break;
+        default:
+          navigate(HOME)
+          break;
+      }
+    }
+  },[user, navigate])
+  
+  // useEffect(()=> {
+  //   const etatInitial = JSON.parse(localStorage.getItem('user-auth'))
+  //   etatInitial != null ? navigate
+  // },[])
 
   return (
     <div className="min-h-screen mt-20 flex items-center justify-center p-4 relative overflow-hidden">
@@ -145,7 +181,6 @@ export const SignInPage = () => {
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <PasswordInput
                         placeholder="••••••••"
                         className="pl-10"

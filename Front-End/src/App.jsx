@@ -1,13 +1,14 @@
 import './App.css'
 import { RouterProvider } from 'react-router-dom'
 import { Router } from './router/Router'
-import { AuthProvider } from './context/AuthContext'
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 
 export default function App() {
   return (
-    <AuthProvider>
+    <Provider store={store}>
       <RouterProvider router={Router} />
-    </AuthProvider>
+    </Provider>
   )
 }

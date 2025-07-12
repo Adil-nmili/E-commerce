@@ -1,15 +1,17 @@
 import React from "react";
 import { Input } from "./input";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, KeyRoundIcon } from "lucide-react";
 
 export const PasswordInput = React.forwardRef(({ className, ...props }, ref) => {
   const [showPassword, setShowPassword] = React.useState(false);
   
   return (
     <div className="relative">
+      <KeyRoundIcon  className="absolute top-1/2 text-gray-500 -translate-y-1/2 left-1.5" size={16}/>
       <Input
         type={showPassword ? "text" : "password"}
-        className={className}
+        className={`pl-7 ${className}`}
+        placeholder="********"
         ref={ref}
         {...props}
       />
